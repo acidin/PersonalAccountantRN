@@ -25,7 +25,7 @@
 - 3.3) **[Android]** Follow the `manually add firebase` to your app instructions [here](https://firebase.google.com/docs/android/setup#manually_add_firebase) to generate your `google-services.json` file if you haven't done so already - use the package name generated previously as your `Android package name`.
 - 3.4) Place this file in the `android/app/` directory of your project.
   
- #### 4) Rename scr/config-example.js to config.js 
+ #### 4) Rename src/config-example.js to config.js 
  
  - 4.1) Rename the file
  - 4.2) Go to the Firebase console and receive a proper credentials.
