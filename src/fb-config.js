@@ -1,4 +1,4 @@
-import firebase from 'react-native-firebase';
+import firebase from 'firebase';
 import * as configFirebase from './config';
 
 const config = {
@@ -8,5 +8,3 @@ const config = {
     storageBucket: configFirebase.STORAGE_BUCKET
 }
 firebase.initializeApp(config);
-
-export default firebase;

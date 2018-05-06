@@ -4,8 +4,13 @@ import AccountScreen from '../AccountScreen/index.js';
 import AddAccountScreen from '../AddAccountScreen/index.js';
 import AddCategoryScreen from '../AddCategoryScreen/index.js';
 import {DrawerNavigator} from 'react-navigation';
-import firebaseApp from '../Firebase';
-import {NavigationActions} from "react-navigation";
+import '../fb-config.js';
+import {NavigationActions} from 'react-navigation';
+import {configure} from 'mobx';
+import {Provider, observer} from 'mobx-react';
+import AuthStore from '../stores/AuthStore';
+
+configure({ enforceActions: true });
 
 const HomeScreenRouter = DrawerNavigator(
     {
@@ -16,6 +21,7 @@ const HomeScreenRouter = DrawerNavigator(
     }
 )
 
+@observer
 export default class MyDrawer extends Component {
     constructor(props) {
         super(props);
@@ -29,11 +35,10 @@ export default class MyDrawer extends Component {
             accounts: [],
             transactions: [],
             categoriesTransactions: [],
-            currentAccountId: 0,//hz
-            currentAccountName: '',//hz
+            currentAccountId: 0,
+            currentAccountName: '',
             selectedAcc: null,
             selectedCat: null,
-
         }
     }
 
@@ -131,21 +136,23 @@ export default class MyDrawer extends Component {
 
     render() {
         return (
-            <HomeScreenRouter
-                screenProps={
-                    {
-                        userId: this.state.userId,
-                        authentication: this.state.selectedAcc,
-                        navigation: this.props.navigation,
-                        categoriesTransactions: this.state.categoriesTransactions,
-                        transactions: this.state.transactions,
-                        accounts: this.state.accounts,
-                        onRegister: this.onRegister,
-                        onLogin: this.onLogin,
-                        next: this.next,
+            <Provider AuthStore={AuthStore}>
+                <HomeScreenRouter
+                    screenProps={
+                        {
+                            userId: this.state.userId,
+                            authentication: this.state.selectedAcc,
+                            navigation: this.props.navigation,
+                            categoriesTransactions: this.state.categoriesTransactions,
+                            transactions: this.state.transactions,
+                            accounts: this.state.accounts,
+                            onRegister: this.onRegister,
+                            onLogin: this.onLogin,
+                            next: this.next,
+                        }
                     }
-                }
-            />
+                />
+            </Provider>
         );
     }
 }

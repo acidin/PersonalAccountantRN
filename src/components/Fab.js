@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, View, Button, Icon, Fab } from 'native-base';
-import firebaseApp from '../Firebase';
+import firebaseApp from '../fb-config';
 
 // onPress={() => this.props.navigation.navigate("Expenses")}
 

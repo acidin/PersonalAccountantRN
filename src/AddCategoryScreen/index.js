@@ -18,7 +18,7 @@ import {
   View
 } from "native-base";
 import { NavigationActions } from "react-navigation";
-import firebaseApp from '../Firebase';
+import firebaseApp from '../fb-config';
 import Category from '../components/Category';
 
 // firebaseApp.database().ref('users').child(response.user.uid).set({

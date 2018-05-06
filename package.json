@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "fbjs": "^0.8.16",
+        "firebase": "^4.13.1",
         "firebase-nest": "^0.7.1",
         "mobx": "^4.2.1",
         "mobx-firebase-store": "^1.2.1",
