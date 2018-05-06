@@ -7,10 +7,10 @@ import {DrawerNavigator} from 'react-navigation';
 import '../fb-config.js';
 import {NavigationActions} from 'react-navigation';
 import {configure} from 'mobx';
-import {Provider, observer} from 'mobx-react';
+import {Provider, observer} from 'mobx-react/native';
 import AuthStore from '../stores/AuthStore';
 
-configure({ enforceActions: true });
+configure({enforceActions: true});
 
 const HomeScreenRouter = DrawerNavigator(
     {
@@ -136,7 +136,7 @@ export default class MyDrawer extends Component {
 
     render() {
         return (
-            <Provider AuthStore={AuthStore}>
+            <Provider AuthStore={new AuthStore()}>
                 <HomeScreenRouter
                     screenProps={
                         {

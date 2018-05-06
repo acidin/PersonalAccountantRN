@@ -18,57 +18,29 @@ import {
     Input,
     View
 } from "native-base";
-import {login, reg, exit, next} from '../constants';
-import {observer, inject} from 'mobx-react'
-import firebaseApp from "../fb-config";
+import {login, reg, exit} from '../constants';
 import {AuthStore} from "../stores/AuthStore";
+import {observer, inject} from 'mobx-react/native';
 
 @inject('AuthStore') @observer
 export default class LoginScreen extends Component {
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         authentication: false,//don't use
-    //         email: 'q2@test.net',
-    //         password: 'qwerty'
-    //     }
-    // }
-
-    componentDidMount() {
-        // const {email, password} = this.state;
-        //
-        // firebaseApp.auth()
-        //     .signInAndRetrieveDataWithEmailAndPassword(email, password)
-        //     .then(response => {
-        //         this.props.AuthStore.setUsers(response.user)
-        //     });
-    }
-
     exit = () => {
-
     };
 
     onLoginHandler = () => {
-        console.log(this.props);
-        console.log(this.props.AuthStore);
+        const {AuthStore} = this.props;
 
-        this.props.AuthStore.signIn();
-
-        // this.setState({
-        //     authentication: this.props.AuthStore.isLoggedin
-        // });
+        AuthStore.doLogin(AuthStore.email, AuthStore.password);
     };
 
     onRegisterHandler = () => {
-        // this.props.screenProps.onRegister(this.state.email, this.state.password);
         this.onLoginHandler();
     };
 
     getContent = () => {
         const {AuthStore} = this.props;
 
-        if (!this.props.AuthStore.isLoggedin)
+        if (!AuthStore.isLoggedin)
             return (
                 <Form>
                     <Item>
@@ -133,7 +105,7 @@ export default class LoginScreen extends Component {
                 <Content>
                     {this.getContent()}
                     <Text>
-                        user via MOBX = {this.props.AuthStore.user}
+                        userUid via MOBX = {this.props.AuthStore.uid}
                     </Text>
                     <Text>
                         categoriesTransactions length = {this.props.screenProps.categoriesTransactions.length}
